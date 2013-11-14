@@ -37,17 +37,21 @@ function MemoryStore(options, bucket) {
 
 MemoryStore.prototype.get = function get(key, fn) {
   fn = fn || noop;
-  var data = this.client.get(key);
+  var val, data = this.client.get(key);
   if (!data) return fn(null, data);
   if (data.expire < Date.now()) {
     this.client.del(key);
     return fn();
   }
   try {
-    fn(null, JSON.parse(data.value));
+    val = JSON.parse(data.value);
   } catch (e) {
-    fn(e);
+    return fn(e);
   }
+
+  process.nextTick(function tick() {
+    fn(null, val);
+  });
 };
 
 /**
@@ -62,6 +66,7 @@ MemoryStore.prototype.get = function get(key, fn) {
 
 MemoryStore.prototype.set = function set(key, val, ttl, fn) {
   
+  var data;
   if ('function' === typeof ttl) {
     fn = ttl;
     ttl = null;
@@ -69,19 +74,23 @@ MemoryStore.prototype.set = function set(key, val, ttl, fn) {
 
   fn = fn || noop;
 
-  if ('undefined' === typeof val) return fn(null, null);
+  if ('undefined' === typeof val) return fn();
 
   try {
-    var data = {
+    data = {
       value: JSON.stringify(val),
       expire: Date.now() + ((ttl || 60) * 1000)
     };
   } catch (e) {
-    fn(e);
+    return fn(e);
   }
 
   this.client.set(key, data);
-  fn(null, val);
+
+  process.nextTick(function tick() {
+    fn(null, val);
+  });
+  
 };
 
 /**
