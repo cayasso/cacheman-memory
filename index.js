@@ -114,7 +114,13 @@ MemoryStore.prototype.del = function del(key, fn) {
  * @api public
  */
 
-MemoryStore.prototype.clear = function clear(fn) {
+MemoryStore.prototype.clear = function clear(key, fn) {
+  
+  if ('function' === typeof key) {
+    fn = key;
+    key = null;
+  }
+
   fn = fn || noop;
   this.client.reset();
   process.nextTick(fn);
