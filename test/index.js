@@ -1,6 +1,7 @@
-var assert = require('assert')
-  , Cache = require('../')
-  , cache;
+import assert from 'assert';
+import Cache from '../lib/index';
+
+let cache;
 
 describe('cacheman-memory', function () {
 
@@ -10,8 +11,7 @@ describe('cacheman-memory', function () {
   });
 
   after(function(done){
-    cache.clear('test');
-    done();
+    cache.clear(done);
   });
 
   it('should have main methods', function () {
@@ -66,7 +66,7 @@ describe('cacheman-memory', function () {
   });
 
   it('should delete items', function (done) {
-    var value = Date.now();
+    let value = Date.now();
     cache.set('test5', value, function (err) {
       if (err) return done(err);
       cache.get('test5', function (err, data) {
@@ -85,13 +85,13 @@ describe('cacheman-memory', function () {
   });
 
   it('should clear items', function (done) {
-    var value = Date.now();
+    let value = Date.now();
     cache.set('test6', value, function (err) {
       if (err) return done(err);
       cache.get('test6', function (err, data) {
         if (err) return done(err);
         assert.equal(data, value);
-        cache.clear('', function (err) {
+        cache.clear(function (err) {
           if (err) return done(err);
           cache.get('test6', function (err, data) {
             if (err) return done(err);
