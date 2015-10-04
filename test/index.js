@@ -20,7 +20,7 @@ describe('cacheman-memory', function () {
     assert.ok(cache.del);
     assert.ok(cache.clear);
   });
-    
+
   it('should store items', function (done) {
     cache.set('test1', { a: 1 }, function (err) {
       if (err) return done(err);

@@ -22,7 +22,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "^2.3.3",
+    "pre-commit": "^1.1.1"
   },
   "dependencies": {
     "babel": "^5.8.23",
