@@ -1,6 +1,6 @@
 {
   "name": "cacheman-memory",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "In-memory caching library for Node.JS and also cache engine for cacheman",
   "author": "Jonathan Brumley <cayasso@gmail.com>",
   "main": "./node/index",
@@ -22,8 +22,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "babel": "^5.8.29",
     "mocha": "*",
-    "babel": "^5.8.29"
+    "pre-commit": "1.1.2"
   },
   "dependencies": {
     "lru-cache": "~2.7.x"
