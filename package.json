@@ -6,7 +6,7 @@
   "main": "./node/index",
   "scripts": {
     "test": "make test",
-    "postinstall": "make"
+    "prepublish": "make"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "babel": "^5.8.29"
   },
   "dependencies": {
-    "babel": "^5.8.23",
     "lru-cache": "~2.7.x"
   }
 }
