@@ -31,7 +31,7 @@ cache.set('my key', { foo: 'bar' }, function (error) {
 
     // delete entry
     cache.del('my key', function (error){
-      
+
       if (error) throw error;
 
       console.log('value deleted');
@@ -102,6 +102,19 @@ Clear the cache entirely, throwing away all values.
 cache.clear(function (err) {
   if (err) throw err;
   // cache is now clear
+});
+```
+
+### cache.getAll([fn])
+
+Get all keys and entries in cache
+
+```javascript
+cache.set('foo', { a: 'bar' }, 60, function (err, value) {
+  if (err) throw err;
+  cache.getAll(function (err, data) {
+    if (err) throw err;
+  // [{ key: 'foo', data: { a: 'bar' } }]
 });
 ```
 
