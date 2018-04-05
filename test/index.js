@@ -110,7 +110,7 @@ describe('cacheman-memory', function () {
       if (err) return done(err);
       setTimeout(function () {
         cache.get('test1', function (err, data) {
-        if (err) return done(err);
+          if (err) return done(err);
           assert.equal(data, null);
           done();
         });
@@ -144,4 +144,19 @@ describe('cacheman-memory', function () {
       done();
     });
   });
+
+  it('should not expire key', function (done) {
+    this.timeout(0);
+    cache.set('test1', { a: 1 }, -1, function (err) {
+      if (err) return done(err);
+      setTimeout(function () {
+        cache.get('test1', function (err, data) {
+          if (err) return done(err);
+          assert.deepEqual(data, { a: 1 });
+          done();
+        });
+      }, 500);
+    });
+  });
+
 });
