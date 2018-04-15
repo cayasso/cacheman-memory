@@ -19,8 +19,9 @@ describe('cacheman-memory', function () {
     assert.ok(cache.get);
     assert.ok(cache.del);
     assert.ok(cache.clear);
+    assert.ok(cache.getAll);
   });
-    
+
   it('should store items', function (done) {
     cache.set('test1', { a: 1 }, function (err) {
       if (err) return done(err);
@@ -117,4 +118,30 @@ describe('cacheman-memory', function () {
     });
   });
 
+  it('should get all items in cache', function (done) {
+    let entries, items = [
+      { key: 'test0', data: { a: 'test0' } },
+      { key: 'test1', data: { a: 'test1' } },
+      { key: 'test2', data: { a: 'test2' } }
+    ];
+
+    function compare(a, b) {
+      if (a.key < b.key) return -1;
+      else if (a.key > b.key) return 1;
+      else return 0;
+    }
+
+    items.forEach(function (obj, index) {
+      cache.set(obj.key, obj.data, function (err, val) {
+        assert.deepEqual(null, err);
+      });
+    });
+
+    cache.getAll(function (err, results) {
+      assert.deepEqual(null, err);
+      entries = results.sort(compare);
+      assert.deepEqual(items, entries);
+      done();
+    });
+  });
 });
