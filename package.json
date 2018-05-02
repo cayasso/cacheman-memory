@@ -1,6 +1,6 @@
 {
   "name": "cacheman-memory",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "In-memory caching library for Node.JS and also cache engine for cacheman",
   "author": "Jonathan Brumley <cayasso@gmail.com>",
   "main": "./src/index",
