@@ -3,10 +3,9 @@
   "version": "1.0.2",
   "description": "In-memory caching library for Node.JS and also cache engine for cacheman",
   "author": "Jonathan Brumley <cayasso@gmail.com>",
-  "main": "./node/index",
+  "main": "./src/index",
   "scripts": {
-    "test": "make test",
-    "prepublish": "make"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,11 +21,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.8.29",
-    "mocha": "*",
-    "pre-commit": "1.1.2"
+    "pre-commit": "1.2.2",
+    "mocha": "^5.1.1"
   },
   "dependencies": {
-    "lru-cache": "~2.7.x"
+    "lru-cache": "~4.1.x"
   }
 }
